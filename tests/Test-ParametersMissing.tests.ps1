@@ -6,6 +6,10 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".tests.", ".")
 # Dot source function
 . $(Join-Path $ProjectRoot "\src\public\$sut")
 
+# Import PSScriptAnalyzer and dependent classes/libraries
+
+Import-Module -Name PSScriptAnalyzer
+
 function Get-ScriptBlockAst
 {
     param(
