@@ -12,12 +12,10 @@ Install from the PowerShell Gallery
 import-module -name ScriptAnalyzerRulesLWA
 ```
 
-## Usage
-
 Run the rules against your code
 
-```
-
+```powershell
+Invoke-ScriptAnalyzer -CustomRulePath (Get-Module -name ScriptAnalyzerRulesLWA).path -Path ./MyScript.ps1 -verbose
 ```
 
 ## Contributions
