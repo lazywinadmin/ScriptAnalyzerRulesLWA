@@ -4,7 +4,7 @@ $ProjectRoot = Split-Path -Path (Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".tests.", ".")
 
 # Dot source function
-. $(Join-Path $ProjectRoot "\src\public\$sut")
+. $(Join-Path -path $ProjectRoot -ChildPath "\src\public\$sut")
 
 # Import PSScriptAnalyzer module to get the dependent classes/libraries
 Import-Module -Name PSScriptAnalyzer
@@ -28,7 +28,11 @@ Describe "Test-ParametersMissing" {
 
     Context "Behavior" {
 
-        $ExpectedResult = @{Message  = "Missing named parameter '-0' on the following command 'Select-Property Name'";
+        It 'Loaded' {
+            Get-ChildItem function:/Test-ParametersMissing | should be $true
+        }
+
+        $ExpectedResult = @{Message  = "Missing parameter '-Property' on command 'Select-Object Name'";
                             RuleName = 'Test-ParametersMissing';
                             Severity = 'Warning'}
 
