@@ -6,8 +6,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".tests.", ".")
 # Dot source function
 . $(Join-Path $ProjectRoot "\src\public\$sut")
 
-# Import PSScriptAnalyzer and dependent classes/libraries
-
+# Import PSScriptAnalyzer module to get the dependent classes/libraries
 Import-Module -Name PSScriptAnalyzer
 
 function Get-ScriptBlockAst
@@ -27,7 +26,7 @@ function Get-ScriptBlockAst
 
 Describe "Test-ParametersMissing" {
 
-    Context "DescriptionFiledMissing" {
+    Context "Behavior" {
 
         $ExpectedResult = @{Message  = "Missing named parameter '-0' on the following command 'Select-Property Name'";
                             RuleName = 'Test-ParametersMissing';
@@ -37,6 +36,10 @@ Describe "Test-ParametersMissing" {
 
         It 'Test rule generate output' {
             $result -ne $null | should be $true
+        }
+
+        It 'Test output type' {
+            $result | Should -BeOfType [Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord]
         }
 
 
