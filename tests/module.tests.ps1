@@ -15,6 +15,9 @@ begin{
 
     # Public functions
     $publicFiles = @(Get-ChildItem -Path $srcPath\public\*.ps1 -ErrorAction SilentlyContinue)
+
+    # Import PSScriptAnalyzer module to get the dependent classes/libraries
+    Import-Module -Name PSScriptAnalyzer
 }
 end{
     $ModuleInformation | Remove-Module -ErrorAction SilentlyContinue

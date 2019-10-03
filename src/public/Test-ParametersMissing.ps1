@@ -20,15 +20,19 @@ https://github.com/lazywinadmin/ScriptAnalyzerRulesLWA
 General notes
 #>
     [CmdletBinding()]
+    [OutputType([Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord])]
     PARAM(
         [Parameter(Mandatory=$true)]
         [System.Management.Automation.Language.ScriptBlockAst]
         $ScriptBlockAst
         )
-
+    begin{
+        $FunctionName = $MyInvocation.InvocationName
+        Write-Verbose -Message "[$FunctionName] starting..."
+    }
     process {
         try{
-            #Only look at current block
+            # Only look at current block
             if($ScriptBlockAst[0].Extent.text[0] -eq '{'){
                 return
             }
@@ -46,22 +50,20 @@ General notes
 
                     # For each parameters
                     foreach ($CurrentParameter in ($Parameters.boundparameters.keys)){
-                        if($CurrentCommand.tostring() -notmatch "-$CurrentParameter" -and
+                        if($CurrentCommand.tostring() -notmatch "\s-$CurrentParameter" -and
                         $CurrentCommand.tostring() -notmatch ' @' -and
-                        "-$CurrentParameter" -notmatch '^([0-9]{1})'){
+                        "-$CurrentParameter" -notmatch '^-([0-9]{1})'){
 
                             [Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord]@{
-                                Message = "Missing named parameter '-$CurrentParameter' on the following command '$CurrentCommand'"
-                                Extent = $CurrentCommand.Extent
+                                Message = "Missing parameter '-$CurrentParameter' on command '$CurrentCommand'"
+                                Extent  = $CurrentCommand.Extent
                                 Rulename = $PSCmdlet.MyInvocation.MyCommand.Name
                                 Severity = 'Warning'
                             }
                         }
                     }
                 }
-
             }
-
         }catch{
             $PSCmdlet.ThrowTerminatingError($_)
         }
