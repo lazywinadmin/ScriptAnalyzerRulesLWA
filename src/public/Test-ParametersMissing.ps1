@@ -20,6 +20,7 @@ https://github.com/lazywinadmin/ScriptAnalyzerRulesLWA
 General notes
 #>
     [CmdletBinding()]
+    [OutputType([Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord])]
     PARAM(
         [Parameter(Mandatory=$true)]
         [System.Management.Automation.Language.ScriptBlockAst]
