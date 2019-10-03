@@ -1,2 +1,2 @@
 param()
-Get-Process | Select-Property Name
+Get-Process | Select-Object Name
