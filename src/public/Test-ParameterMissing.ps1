@@ -1,4 +1,4 @@
-function Test-ParametersMissing
+function Test-ParameterMissing
 {
 <#
 .SYNOPSIS
