@@ -24,19 +24,19 @@ function Get-ScriptBlockAst
     $Ast
 }
 
-Describe "Test-ParametersMissing" {
+Describe "Test-AvoidErrorClear" {
 
     Context "Behavior" {
 
         It 'Loaded' {
-            Get-ChildItem function:/Test-ParametersMissing | should be $true
+            Get-ChildItem function:/Test-AvoidErrorClear | should be $true
         }
 
-        $ExpectedResult = @{Message  = "Missing parameter '-Property' on command 'Select-Object Name'";
-                            RuleName = 'Test-ParametersMissing';
+        $ExpectedResult = @{Message  = 'Avoid using $Error.clear()';
+                            RuleName = 'Test-AvoidErrorClear';
                             Severity = 'Warning'}
 
-        $result = Test-ParametersMissing -ScriptBlockAst (Get-ScriptBlockAst -Path (Join-Path -Path $TestDataFolder -ChildPath '1.ps1'))
+        $result = Test-AvoidErrorClear -ScriptBlockAst (Get-ScriptBlockAst -Path (Join-Path -Path $TestDataFolder -ChildPath '02-avoiderrorclear.ps1'))
 
         It 'Test rule generate output' {
             $result -ne $null | should be $true
