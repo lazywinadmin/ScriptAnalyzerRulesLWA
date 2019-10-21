@@ -46,7 +46,8 @@ task -Name build {
 
     # Find next module version (BuildHelpers module)
     Write-Verbose -Message "Find next module version (BuildHelpers module)"
-    $moduleVersion = Get-NextNugetPackageVersion -Name $moduleName
+    $script:moduleVersion = Get-NextNugetPackageVersion -Name $moduleName
+    Write-Verbose -Message "Next module version is '$moduleVersion'"
 
     $moduleManifestData = @{
         Guid = $Guid
@@ -85,7 +86,8 @@ task -Name deploy {
     #$PSDeployFile = Join-Path -Path $buildPath -ChildPath 'build.psdeploy.ps1'
     #Invoke-PSDeploy -Path $PSDeployFile -Force
     Write-Verbose -Message "Publishing module '$env:moduleName' version '$moduleVersion'"
-    Publish-Module -Name $env:moduleName -NuGetApiKey $env:psgallerykey
+    Write-Verbose -Message "k: $env:psgallerykey"
+    Publish-Module -Name $env:moduleName -NuGetApiKey $env:psgallerykey -Verbose
 }
 
 task -Name test {
