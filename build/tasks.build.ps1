@@ -87,7 +87,7 @@ task -Name deploy {
     #Invoke-PSDeploy -Path $PSDeployFile -Force
     Write-Verbose -Message "Publishing module '$env:moduleName' version '$moduleVersion'"
     Write-Verbose -Message "k: $env:psgallerykey"
-    Publish-Module -Name $env:moduleName -NuGetApiKey "$env:psgallerykey" -Verbose
+    Publish-Module -Name $env:moduleName -NuGetApiKey "$($env:psgallerykey)" -Verbose
 }
 
 task -Name test {
