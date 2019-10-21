@@ -62,8 +62,15 @@ task -Name build {
         LicenseUri = $licenseUri
         Tags = $tags
     }
+    Write-Verbose -Message "Update Module Manifest"
     Update-ModuleManifest @moduleManifestData
+
+    Write-Verbose -Message "Import Module"
     Import-Module -Name $modulePath -RequiredVersion $moduleVersion
+
+    Write-Verbose -Message "Add OutputPath to '$Env:PSModulePath'"
+    $env:PSModulePath = $env:PSModulePath + ";$buildOutputPath"
+    Write-Verbose -Message "Updated. PSModulePath is now: '$Env:PSModulePath'"
 }
 
 task -Name clean {
@@ -75,8 +82,10 @@ task -Name clean {
 }
 
 task -Name deploy {
-    $PSDeployFile = Join-Path -Path $buildPath -ChildPath 'build.psdeploy.ps1'
-    Invoke-PSDeploy -Path $PSDeployFile -Force
+    #$PSDeployFile = Join-Path -Path $buildPath -ChildPath 'build.psdeploy.ps1'
+    #Invoke-PSDeploy -Path $PSDeployFile -Force
+    Write-Verbose -Message "Publishing module '$env:moduleName' version '$moduleVersion'"
+    Publish-Module -Name $env:moduleName -NuGetApiKey $env:psgallerykey
 }
 
 task -Name test {
