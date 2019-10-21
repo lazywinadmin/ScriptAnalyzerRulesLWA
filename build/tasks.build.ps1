@@ -79,7 +79,7 @@ task -Name clean {
     Remove-Item -confirm:$false -Recurse -path $buildOutputPath -ErrorAction SilentlyContinue
 
     # Delete env variables created
-    Get-ChildItem -Path env:modulepath,env:modulename,env:bh* -ErrorAction SilentlyContinue | remove-item
+    Get-ChildItem -Path env:modulePath,env:moduleName,env:bh* -ErrorAction SilentlyContinue | remove-item
 }
 
 task -Name deploy {
@@ -87,7 +87,7 @@ task -Name deploy {
     #Invoke-PSDeploy -Path $PSDeployFile -Force
     Write-Verbose -Message "Publishing module '$env:moduleName' version '$moduleVersion'"
     Write-Verbose -Message "k: $env:psgallerykey"
-    Publish-Module -Name $env:moduleName -NuGetApiKey $env:psgallerykey -Verbose
+    Publish-Module -Name $env:moduleName -NuGetApiKey "$env:psgallerykey" -Verbose
 }
 
 task -Name test {
