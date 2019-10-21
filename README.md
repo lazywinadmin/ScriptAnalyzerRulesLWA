@@ -19,3 +19,5 @@ Invoke-ScriptAnalyzer -CustomRulePath (Get-Module -name ScriptAnalyzerRulesLWA).
 ```
 
 ## Contributions
+
+See [Contributing](CONTRIBUTING.md) file.
