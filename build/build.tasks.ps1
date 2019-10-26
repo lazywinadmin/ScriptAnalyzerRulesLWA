@@ -50,7 +50,7 @@ task -Name build {
     Write-Verbose -Message "Next module version is '$moduleVersion'"
 
     $moduleManifestData = @{
-        Guid = $Guid
+        #Guid = $Guid
         Author = $author
         Description = $Description
         Copyright = "(c) $((Get-Date).year) $author. All rights reserved."
