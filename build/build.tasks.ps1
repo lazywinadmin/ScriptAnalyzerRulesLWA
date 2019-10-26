@@ -83,19 +83,20 @@ task -Name clean {
 }
 
 task -Name deploy {
-    Write-Verbose -Message "Remove modules PowerShellGet,PackageManagement"
-    Remove-Module -Name PowerShellGet,PackageManagement -Verbose
+    #Write-Verbose -Message "Remove modules PowerShellGet,PackageManagement"
+    #Remove-Module -Name PowerShellGet,PackageManagement -Verbose
 
-    Write-Verbose -Message "Import PowerShellGet 2.1.3"
-    Import-Module -Name PowerShellGet -RequiredVersion 2.1.3 -Verbose
-    Write-Verbose -Message "Import PackageManagement 1.3.2"
-    Import-Module -Name PackageManagement -RequiredVersion 1.3.2 -Verbose
+    #Write-Verbose -Message "Import PowerShellGet 2.1.3"
+    #Import-Module -Name PowerShellGet -RequiredVersion 2.1.3 -Verbose
+    #Write-Verbose -Message "Import PackageManagement 1.3.2"
+    #Import-Module -Name PackageManagement -RequiredVersion 1.3.2 -Verbose
 
     #$PSDeployFile = Join-Path -Path $buildPath -ChildPath 'build.psdeploy.ps1'
     #Invoke-PSDeploy -Path $PSDeployFile -Force
-    Write-Verbose -Message "Publishing module '$env:moduleName' version '$moduleVersion'"
-    Write-Verbose -Message "k: $env:psgallerykey"
-    Publish-Module -Name $env:moduleName -NuGetApiKey "$($env:psgallerykey)" -Verbose
+    #Write-Verbose -Message "Publishing module '$env:moduleName' version '$moduleVersion'"
+    #Write-Verbose -Message "k: $env:psgallerykey"
+    #Publish-Module -Name $env:moduleName -NuGetApiKey "$($env:psgallerykey)" -Verbose
+    Invoke-PSDeploy -Path $buildPSDeployFilePath -Force
 }
 
 task -Name test {
