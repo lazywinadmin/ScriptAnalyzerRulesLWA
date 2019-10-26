@@ -45,6 +45,7 @@ try{
 
     $requirementsFilePath = "$buildPath\build.psdepend.psd1" # contains dependencies
     $buildTasksFilePath = "$buildPath\build.tasks.ps1" # contains tasks to execute
+    $buildPSDeployFilePath = "$buildPath\build.psdeploy.ps1" # contains tasks to execute
 
     if($InstallDependencies)
     {
