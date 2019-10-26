@@ -14,7 +14,7 @@ steps:
     .\build.ps1 -InstallDependencies:$true -verbose -tasks 'setEnvironment','build','test','deploy'
   displayName: 'PowerShell - Build > test > deploy'
   env:
-    psgallerykey: $(nugetapikey)
+    nugetapikey: $(nugetapikey)
 - task: PublishTestResults@2
   displayName: 'Publish Test Results **/TEST-*.xml'
   inputs:
