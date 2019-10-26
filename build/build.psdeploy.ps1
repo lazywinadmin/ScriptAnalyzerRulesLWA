@@ -16,7 +16,7 @@ if(
             FromSource -Source (Join-Path -path (Split-Path -Path $PSScriptRoot -Parent) -ChildPath "buildoutput\$env:moduleName")
             To -Targets PSGallery
             WithOptions -Options @{
-                ApiKey = $env:psgallerykey
+                ApiKey = $env:nugetapikey
             }
         }
     }
