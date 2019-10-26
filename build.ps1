@@ -43,8 +43,8 @@ try{
     $env:moduleName = $moduleName
     $env:modulePath = $modulePath
 
-    $requirementsFilePath = "$buildPath\requirements.psd1" # contains dependencies
-    $buildTasksFilePath = "$buildPath\tasks.build.ps1" # contains tasks to execute
+    $requirementsFilePath = "$buildPath\build.psdepend.psd1" # contains dependencies
+    $buildTasksFilePath = "$buildPath\build.tasks.ps1" # contains tasks to execute
 
     if($InstallDependencies)
     {
