@@ -10,6 +10,8 @@
             SkipPublisherCheck = $true
         }
     }
+    PowerShellGet = '2.1.3'
+    PackageManagement = '1.3.2'
     PSScriptAnalyzer = 'Latest'
     BuildHelpers = 'Latest'
     PSDeploy = 'Latest'
