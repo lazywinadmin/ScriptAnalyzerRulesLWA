@@ -1,6 +1,7 @@
 {
     "powershell.codeFormatting.openBraceOnSameLine": false,
     "powershell.codeFormatting.newLineAfterOpenBrace": true,
+    "powershell.codeFormatting.alignPropertyValuePairs": true,
     "powershell.codeFormatting.preset": "Allman",
     "editor.renderWhitespace": "all",
     "editor.tabSize": 4,
