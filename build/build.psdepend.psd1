@@ -13,6 +13,7 @@
     PowerShellGet = '2.1.3'
     PackageManagement = '1.3.2'
     PSScriptAnalyzer = 'Latest'
+    ScriptAnalyzerRulesLWA = 'Latest'
     BuildHelpers = 'Latest'
     PSDeploy = 'Latest'
     InvokeBuild = 'Latest'
