@@ -130,9 +130,10 @@ task -name analyze {
     $PSScriptAnalyzerParams = @{
         IncludeDefaultRules = $true
         Path                = "$modulePath" # $ModuleName.psd1"
-        Settings            = "$buildPath\ScriptAnalyzerSettings.psd1"
+        Settings            = "$buildPath\build.scriptanalyzersettings.psd1"
         Severity            = 'Warning','Error'
         Recurse             = $true
+        CustomRulePath      = (Get-Module -Name ScriptAnalyzerRulesLWA -ListAvailable).Path
     }
 
     "Analyzing $ManifestPath..."
