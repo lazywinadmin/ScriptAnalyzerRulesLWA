@@ -54,11 +54,26 @@ General notes
                         $CurrentCommand.tostring() -notmatch ' @' -and
                         "-$CurrentParameter" -notmatch '^-([0-9]{1})'){
 
+                            # Retrieve lines where the parameter is missing
+                            [int]$startLineNumber =  $CurrentCommand.Extent.StartLineNumber
+                            [int]$endLineNumber = $CurrentCommand.Extent.EndLineNumber
+                            [int]$startColumnNumber = $CurrentCommand.Extent.StartColumnNumber
+                            [int]$endColumnNumber = $CurrentCommand.Extent.EndColumnNumber
+
+                            # Define where the parameter must go
+                            ##[string]$correction = "-$CurrentParameter"
+                            ##$correctionExtent = New-Object -TypeName 'Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.CorrectionExtent' -ArgumentList $startLineNumber,$endLineNumber,$startColumnNumber,$correction,'description'
+                            #$correctionExtent = New-Object -TypeName 'Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.CorrectionExtent' -ArgumentList $startLineNumber,$endLineNumber,$startColumnNumber,$endColumnNumber,$correction,'description'
+
+                            ##$suggestedCorrections = New-Object -TypeName System.Collections.ObjectModel.Collection['Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.CorrectionExtent']
+                            ##$suggestedCorrections.add($correctionExtent) | Out-Null
+
                             [Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord]@{
-                                Message = "Missing parameter '-$CurrentParameter' on command '$CurrentCommand'"
+                                Message = "Missing parameter '-$CurrentParameter' on command '$CurrentCommand' $startLineNumber,$endLineNumber,$startColumnNumber,$endColumnNumber"
                                 Extent  = $CurrentCommand.Extent
                                 Rulename = $PSCmdlet.MyInvocation.MyCommand.Name
                                 Severity = 'Warning'
+                                ##SuggestedCorrections = $suggestedCorrections
                             }
                         }
                     }
